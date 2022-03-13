@@ -1,0 +1,19 @@
+<app-nav-bar></app-nav-bar>
+<div class="container">
+    <div class="container-wrapper">
+        <header>
+            <img src="./assets/images/undraw_profile_re_4a55.svg">
+        </header>
+        <form [formGroup]="form">
+            <div class="label">Apelido</div>
+            <input type="email" matInput formControlName="email" placeholder="Ex: João">
+            <div class="label">Senha</div>
+            <input type="email" matInput formControlName="email">
+            <div class="label">Repita a senha</div>
+            <input type="email" matInput formControlName="email">
+        </form>
+        <footer>
+            <button type="submit">Cadastre-se</button>
+        </footer>
+    </div>
+</div>

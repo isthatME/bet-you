@@ -1,0 +1,18 @@
+<app-nav-bar></app-nav-bar>
+<div class="container">
+    <div class="container-wrapper">
+        <header>
+            <img src="./assets/images/undraw_login_re_4vu2.svg">
+        </header>
+        <form [formGroup]="form">
+            <div class="label">Apelido</div>
+            <input type="email" matInput formControlName="email" placeholder="Digite seu apelido">
+            <div class="label">Senha</div>
+            <input type="email" matInput formControlName="email" placeholder="Digite sua senha">
+        </form>
+        <footer>
+            <button type="submit">ENTRAR</button>
+            <a routerLink="/register">CADASTRE-SE</a>
+        </footer>
+    </div>
+</div>
