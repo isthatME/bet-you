@@ -4,16 +4,19 @@
         <header>
             <img src="./assets/images/undraw_profile_re_4a55.svg">
         </header>
-        <form [formGroup]="form">
-            <div class="label">Apelido</div>
-            <input type="email" matInput formControlName="email" placeholder="Ex: João">
-            <div class="label">Senha</div>
-            <input type="email" matInput formControlName="email">
-            <div class="label">Repita a senha</div>
-            <input type="email" matInput formControlName="email">
-        </form>
-        <footer>
-            <button type="submit">Cadastre-se</button>
-        </footer>
+        <div class="form-content">
+            <h1 class="form-header-title default-font">Realize seu registro!</h1>
+            <form [formGroup]="form">
+                <div class="label default-font">Apelido</div>
+                <input class="default-font" type="email" matInput formControlName="email" placeholder="Ex: João">
+                <div class="label default-font">Senha</div>
+                <input type="email" matInput formControlName="email">
+                <div class="label default-font">Repita a senha</div>
+                <input class="default-font" type="email" matInput formControlName="email">
+            </form>
+            <footer>
+                <button class="default-font" type="submit">Criar uma conta</button>
+            </footer>
+        </div>
     </div>
 </div>

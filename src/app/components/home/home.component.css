@@ -1,6 +1,6 @@
 .container {
-    background-color: #141414;
-    height: 100vh;
+    background-color: inherit;
+    height: max-content;
     display: flex;
     justify-content: center;
 }
