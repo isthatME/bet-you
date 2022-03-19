@@ -7,7 +7,7 @@
         <div class="form-content">
             <h1 class="form-header-title default-font">Seja bem vindo de volta!</h1>
             <h2 class="form-header-sub-title default-font">Uma comunidade confiável, que te deixará informado 24 horas por dia.</h2>
-            <form [formGroup]="form">
+            <form [formGroup]="form" >
                 <div class="label default-font">Apelido</div>
                 <input class="default-font" type="email" matInput formControlName="email"
                     placeholder="Digite seu apelido">
@@ -16,7 +16,7 @@
                     placeholder="Digite sua senha">
             </form>
             <footer>
-                <button class="default-font" type="submit">ENTRAR</button>
+                <button class="default-font" type="submit" (click)="onSubmit()">ENTRAR</button>
                 <a routerLink="/register">CADASTRE-SE</a>
             </footer>
         </div>
