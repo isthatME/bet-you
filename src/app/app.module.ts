@@ -11,6 +11,10 @@ import { RegisterComponent } from './components/register/register.component';
 import { MatInputModule } from '@angular/material/input';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { MatCardModule } from '@angular/material/card';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth.interceptor';
+import { FixturesServiceService } from './services/fixtures-service.service';
 
 @NgModule({
   declarations: [
@@ -25,10 +29,19 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     BrowserModule,
     routing,
     BrowserAnimationsModule,
+    MatCardModule,
     ReactiveFormsModule,
+    HttpClientModule,
     MatInputModule
   ],
-  providers: [],
+  providers: [
+    FixturesServiceService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      multi: true,
+      useClass: AuthInterceptor
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
