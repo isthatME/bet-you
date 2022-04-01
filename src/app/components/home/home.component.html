@@ -18,7 +18,7 @@
                 </div>
                 <div *ngIf="!voted" class="vote-button-wrapper">
                     <div class="vote-home-team" (click)="voted = true">{{ fixture.time_mandante.nome_popular }}</div>
-                    <div class="vote-withdraw" (click)="voted = true">Empate</div>
+                    <div class="vote-draw" (click)="voted = true">Empate</div>
                     <div class="vote-visitor" (click)="voted = true">{{ fixture.time_visitante.nome_popular }}</div>
                 </div>
                 <app-statistics-graph *ngIf="voted" [statisticsData]="statisticsData"></app-statistics-graph>

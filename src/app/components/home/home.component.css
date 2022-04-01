@@ -23,7 +23,7 @@
     border-radius: 10px 0 0 10px;
     background-color: #1d1f24;
 }
-.vote-withdraw:hover {
+.vote-draw:hover {
     background-color: #1d1f24;
 }
 .vote-visitor:hover {
@@ -34,7 +34,7 @@
     width: 40%;
     border-right: 1px solid black;
 }
-.vote-withdraw {
+.vote-draw {
     width: 20%;
 }
 .vote-visitor {

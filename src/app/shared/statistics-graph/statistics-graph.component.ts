@@ -11,7 +11,7 @@ export class StatisticsGraphComponent implements OnInit, AfterViewInit {
   constructor() { }
 
   @ViewChild('winningPercentage') winningPercentage: ElementRef;
-  @ViewChild('withdrawPercentage') withdrawPercentage: ElementRef;
+  @ViewChild('drawPercentage') drawPercentage: ElementRef;
   @ViewChild('lossPercentage') lossPercentage: ElementRef;
 
   ngOnInit(): void {
@@ -23,9 +23,9 @@ export class StatisticsGraphComponent implements OnInit, AfterViewInit {
     this.winningPercentage.nativeElement.style.width = `${this.statisticsData.chancesOfWinning}%`;
     this.winningPercentage.nativeElement.style.backgroundColor = '#28a743';
     this.winningPercentage.nativeElement.style.marginRight = '4px';
-    this.withdrawPercentage.nativeElement.style.width = `${this.statisticsData.withdrawChances}%`;
-    this.withdrawPercentage.nativeElement.style.backgroundColor = 'grey';
-    this.withdrawPercentage.nativeElement.style.marginRight = '4px';
+    this.drawPercentage.nativeElement.style.width = `${this.statisticsData.drawChances}%`;
+    this.drawPercentage.nativeElement.style.backgroundColor = 'grey';
+    this.drawPercentage.nativeElement.style.marginRight = '4px';
     this.lossPercentage.nativeElement.style.width = `${this.statisticsData.chancesOfLosing}%`;
     this.lossPercentage.nativeElement.style.backgroundColor = 'grey';
     //   new Chart(this.canvas.nativeElement, {
