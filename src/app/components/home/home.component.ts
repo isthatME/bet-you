@@ -1,41 +1,29 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Result } from './models/result.model';
-import { games } from '../../mocks/gamesMock.mock'
-import Chart from 'chart.js/auto';
-import { FixturesServiceService } from 'src/app/services/fixtures-service.service';
+import { Component, OnInit, } from '@angular/core';
+import { FixturesServiceService } from 'src/app/services/fixtures/fixtures-service.service';
+import { Result } from 'src/app/services/fixtures/models/result.model';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  result: Result[];
+  fixtures: Result[];
+  statisticsData: any
   isLoading: boolean;
+  voted: boolean;
 
-  @ViewChild('myCanvas', { static: true }) canvas: ElementRef;
   constructor(private fixturesServiceService: FixturesServiceService) { }
 
   ngOnInit(): void {
+    this.statisticsData = { chancesOfWinning: 60, withdrawChances: 30, chancesOfLosing: 10 }
     this.getResults();
-    this.loadGraph();
-    this.fixturesServiceService.getFixtures().subscribe(res => console.log(res))
+
   }
   getResults(): void {
-    this.isLoading = true;
-    setTimeout(() => {
-      this.result = games;
-      this.isLoading = false;
-    }, 1500);
-  }
-  loadGraph(): void {
-    new Chart(this.canvas.nativeElement, {
-      type: 'line',
-      data: {
-        labels: ["janeiro", "fevereiro"],
-        datasets: [{
-          data: [1, 2]
-        }]
-      }
-    })
+    this.fixturesServiceService.getFixtures()
+      .subscribe((res) => {
+        this.fixtures = res
+        // console.log(res['chave-1'].ida.time_mandante.escudo)
+      })
   }
 }

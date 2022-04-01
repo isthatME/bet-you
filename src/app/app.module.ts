@@ -14,7 +14,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { MatCardModule } from '@angular/material/card';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
-import { FixturesServiceService } from './services/fixtures-service.service';
+import { FixturesServiceService } from './services/fixtures/fixtures-service.service';
+import { StatisticsGraphComponent } from './services/statistics-graph/statistics-graph.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { FixturesServiceService } from './services/fixtures-service.service';
     LoginComponent,
     RegisterComponent,
     NavBarComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    StatisticsGraphComponent
   ],
   imports: [
     BrowserModule,

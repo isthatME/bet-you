@@ -1,12 +1,32 @@
 <app-nav-bar></app-nav-bar>
 <div class="container">
-    <mat-card>
-        <mat-card-content>
-            <canvas #myCanvas></canvas>
-        </mat-card-content>
-        <mat-card-footer>
+    <div class="container-wrapper">
+        <mat-card *ngFor="let fixture of fixtures">
+            <mat-card-content>
+                <div class="teams-data flex-display">
+                    <div class="home-team">
+                        <img src="{{fixture.time_mandante.escudo}}" alt="">
+                        <h1>{{ fixture.time_mandante.nome_popular }}</h1>
+                    </div>
+                    <div class="guest-team">
+                        <img src="{{fixture.time_visitante.escudo}}" alt="">
+                        <h1>{{ fixture.time_visitante.nome_popular }}</h1>
+                    </div>
+                </div>
+                <div class="vote-header">
+                    <h1>Quem vai ganhar?</h1>
+                </div>
+                <div *ngIf="!voted" class="vote-button-wrapper">
+                    <div class="vote-home-team" (click)="voted = true">{{ fixture.time_mandante.nome_popular }}</div>
+                    <div class="vote-withdraw" (click)="voted = true">Empate</div>
+                    <div class="vote-visitor" (click)="voted = true">{{ fixture.time_visitante.nome_popular }}</div>
+                </div>
+                <app-statistics-graph *ngIf="voted" [statisticsData]="statisticsData"></app-statistics-graph>
+            </mat-card-content>
+            <mat-card-footer>
 
-        </mat-card-footer>
-    </mat-card>
+            </mat-card-footer>
+        </mat-card>
+    </div>
     <!-- <app-spinner></app-spinner> -->
 </div>
