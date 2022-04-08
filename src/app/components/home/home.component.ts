@@ -10,7 +10,8 @@ export class HomeComponent implements OnInit {
   fixtures: Result[];
   statisticsData: any
   isLoading: boolean;
-  voted: boolean;
+  searched: boolean;
+  voted: boolean[];
 
   constructor(private fixturesServiceService: FixturesServiceService) { }
 
@@ -20,10 +21,20 @@ export class HomeComponent implements OnInit {
 
   }
   getResults(): void {
+    this.isLoading = true;
     this.fixturesServiceService.getFixtures()
       .subscribe((res) => {
         this.fixtures = res
+        this.voted = new Array(res.length).fill(false);
+        this.isLoading = false;
         // console.log(res['chave-1'].ida.time_mandante.escudo)
       })
+  }
+  identify(_: number, item: Result): number | undefined {
+    return item ? item.partida_id : undefined;
+  }
+  searchedFixture(searchedFixture: string): void {
+    this.searched = true;
+    this.fixtures = this.fixtures.filter(fixture => fixture.time_mandante.nome_popular.toLowerCase().includes(searchedFixture.toLowerCase()))
   }
 }

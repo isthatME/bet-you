@@ -2,10 +2,24 @@
     background-color: inherit;
     height: max-content;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
 }
 .flex-display {
     display: flex;
+}
+mat-card-header {
+    width: 100%;
+    margin: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+mat-card-header h1 {
+    color: white;
+    font-size: 2rem;
+}
+::ng-deep .mat-card-header-text {
+  display: none; 
 }
 .vote-button-wrapper {
     display: flex;
@@ -58,15 +72,14 @@
     margin-top: 5rem;
     flex-wrap: wrap;
     width: 100%;
-    justify-content: center;
     height: 100%;
 }
 mat-card {
-    width: 30rem;
-    min-width: 30rem;
+    width: 33rem;
+    min-width: 28rem;
     margin: 2rem;
     border-radius: 10px;
-    height: 13rem;
+    height: 17rem;
     background-color: #2a2e37;
 }
 mat-card-content {
@@ -87,4 +100,13 @@ mat-card-content img {
 h1 {
     font-family: 'M PLUS Rounded 1c', sans-serif;
     font-weight: bold;
+}
+.votes-amount {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    color: #b9b9b9de;
+    justify-content: center;
+    height: 6rem;
 }

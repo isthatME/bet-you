@@ -16,6 +16,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
 import { FixturesServiceService } from './services/fixtures/fixtures-service.service';
 import { StatisticsGraphComponent } from './shared/statistics-graph/statistics-graph.component';
+import { SearchBarComponent } from './shared/search-bar/search-bar.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { StatisticsGraphComponent } from './shared/statistics-graph/statistics-g
     RegisterComponent,
     NavBarComponent,
     SpinnerComponent,
-    StatisticsGraphComponent
+    StatisticsGraphComponent,
+    SearchBarComponent
   ],
   imports: [
     BrowserModule,
