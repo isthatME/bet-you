@@ -1,5 +1,4 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, fromEvent, map } from 'rxjs';
 
 @Component({
@@ -10,7 +9,7 @@ import { debounceTime, distinctUntilChanged, fromEvent, map } from 'rxjs';
 export class SearchBarComponent implements OnInit {
   @ViewChild('movieSearchInput', { static: true }) movieSearchInput: ElementRef;
   @Output() searchedFixture: EventEmitter<any> = new EventEmitter<any>();
-  constructor(private forBuilder: FormBuilder) { }
+  constructor() { }
 
   ngOnInit(): void {
     this.searchFixture();

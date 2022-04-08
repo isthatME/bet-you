@@ -8,6 +8,7 @@ import { Result } from 'src/app/services/fixtures/models/result.model';
 })
 export class HomeComponent implements OnInit {
   fixtures: Result[];
+  fixtureCopy: Result[];
   statisticsData: any
   isLoading: boolean;
   searched: boolean;
@@ -16,7 +17,7 @@ export class HomeComponent implements OnInit {
   constructor(private fixturesServiceService: FixturesServiceService) { }
 
   ngOnInit(): void {
-    this.statisticsData = { chancesOfWinning: 60, drawChances: 30, chancesOfLosing: 10 }
+    this.statisticsData = { winPrediction: 20, drawPrediction: 20, lossPrediction: 60 }
     this.getResults();
 
   }
@@ -25,16 +26,30 @@ export class HomeComponent implements OnInit {
     this.fixturesServiceService.getFixtures()
       .subscribe((res) => {
         this.fixtures = res
+        this.fixtureCopy = res
         this.voted = new Array(res.length).fill(false);
         this.isLoading = false;
-        // console.log(res['chave-1'].ida.time_mandante.escudo)
       })
   }
   identify(_: number, item: Result): number | undefined {
     return item ? item.partida_id : undefined;
   }
+  geStandardizedFixtureInfo(fixture: Result): string {
+    console.log(fixture.slug)
+    let fixtureSearchPattern = fixture.slug
+      .split('-')
+      .filter((_, idx) => idx < 2)
+    fixtureSearchPattern
+      .splice(1, 0, "x")
+    return fixtureSearchPattern.join(' ')
+  }
   searchedFixture(searchedFixture: string): void {
     this.searched = true;
-    this.fixtures = this.fixtures.filter(fixture => fixture.time_mandante.nome_popular.toLowerCase().includes(searchedFixture.toLowerCase()))
+    this.fixtures = this.fixtureCopy;
+    this.fixtures = this.fixtures.filter(fixture => {
+      let fixtureSearchPattern = this.geStandardizedFixtureInfo(fixture)
+      return fixtureSearchPattern.toLowerCase().includes(searchedFixture.toLowerCase()) ? fixture : ''
+    })
+
   }
 }
