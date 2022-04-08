@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   constructor(private fixturesServiceService: FixturesServiceService) { }
 
   ngOnInit(): void {
-    this.statisticsData = { chancesOfWinning: 60, drawChances: 30, chancesOfLosing: 10 }
+    this.statisticsData = { winPrediction: 20, drawPrediction: 20, lossPrediction: 60 }
     this.getResults();
 
   }
