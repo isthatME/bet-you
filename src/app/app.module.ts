@@ -17,7 +17,9 @@ import { AuthInterceptor } from './auth.interceptor';
 import { FixturesServiceService } from './services/fixtures/fixtures-service.service';
 import { StatisticsGraphComponent } from './shared/statistics-graph/statistics-graph.component';
 import { SearchBarComponent } from './shared/search-bar/search-bar.component';
-
+import { NotifierComponent } from './shared/notifier/notifier.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatIconModule } from '@angular/material/icon';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +29,8 @@ import { SearchBarComponent } from './shared/search-bar/search-bar.component';
     NavBarComponent,
     SpinnerComponent,
     StatisticsGraphComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    NotifierComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,9 @@ import { SearchBarComponent } from './shared/search-bar/search-bar.component';
     MatCardModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatInputModule
+    MatInputModule,
+    MatSnackBarModule,
+    MatIconModule
   ],
   providers: [
     FixturesServiceService,

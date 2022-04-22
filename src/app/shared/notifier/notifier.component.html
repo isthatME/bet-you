@@ -1,0 +1,15 @@
+<div class="content-style">
+    <container-element [ngSwitch]="data.type">
+        <div>
+            <mat-icon *ngSwitchCase="'error'">error</mat-icon>
+            <mat-icon *ngSwitchCase="'success'">check_circle</mat-icon>
+            <mat-icon *ngSwitchCase="'warn'">warning</mat-icon>
+        </div>
+    </container-element>
+    <p>{{data.message}}</p>
+    <div>
+        <button mat-icon-button (click)="snackBarRef.dismiss()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+</div>

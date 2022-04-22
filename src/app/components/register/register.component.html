@@ -8,11 +8,11 @@
             <h1 class="form-header-title default-font">Realize seu registro!</h1>
             <form [formGroup]="form">
                 <div class="label default-font">Apelido</div>
-                <input class="default-font" type="email" matInput formControlName="email" placeholder="Ex: João">
+                <input class="default-font" type="email" matInput formControlName="userName" placeholder="Ex: João">
                 <div class="label default-font">Senha</div>
-                <input type="email" matInput formControlName="email">
+                <input type="email" matInput formControlName="password">
                 <div class="label default-font">Repita a senha</div>
-                <input class="default-font" type="email" matInput formControlName="email">
+                <input class="default-font" type="email" matInput formControlName="repeatPassword">
             </form>
             <footer>
                 <button class="default-font" type="submit" (click)="onSubmit()">Criar uma conta</button>
