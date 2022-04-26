@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LocalStorageService } from 'src/app/core/services/local-storage/local-storage.service';
 import { NotifierService } from 'src/app/core/services/notifier/notifier.service';
 import { LoginResponse } from 'src/app/core/services/users/models/login-response.interface';
 import { UserService } from 'src/app/core/services/users/user.service';
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private notifierService: NotifierService,
-    private userService: UserService
+    private userService: UserService,
+    private localStorage: LocalStorageService
   ) { }
 
   ngOnInit(): void {
@@ -39,7 +41,9 @@ export class LoginComponent implements OnInit {
   }
   handleLoginResponse(res: LoginResponse): void {
     if (res.succed) {
+      const token = res.message.split('.')[1]
       this.router.navigate(['home'])
+      this.localStorage.setToken({accesToken: token})
     } else { this.notifierService.showNotification(res.message, 'Fechar', 'error') }
   }
   handleError(): void {
