@@ -7,12 +7,12 @@
         <div class="form-content">
             <h1 class="form-header-title default-font">Seja bem vindo de volta!</h1>
             <h2 class="form-header-sub-title default-font">Uma comunidade confiável, que te deixará informado 24 horas por dia.</h2>
-            <form [formGroup]="form" >
+            <form [formGroup]="form">
                 <div class="label default-font">Apelido</div>
                 <input class="default-font" type="email" matInput formControlName="userName"
                     placeholder="Digite seu apelido">
                 <div class="label">Senha</div>
-                <input class="default-font" type="password" matInput formControlName="password"
+                <input class="default-font" type="text" matInput formControlName="password"
                     placeholder="Digite sua senha">
             </form>
             <footer>
