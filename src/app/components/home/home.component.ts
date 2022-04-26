@@ -1,6 +1,6 @@
 import { Component, OnInit, } from '@angular/core';
-import { FixturesServiceService } from 'src/app/services/fixtures/fixtures-service.service';
-import { Result } from 'src/app/services/fixtures/models/result.model';
+import { FixturesServiceService } from 'src/app/core/services/fixtures/fixtures-service.service';
+import { Result } from 'src/app/core/services/fixtures/models/result.model';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',

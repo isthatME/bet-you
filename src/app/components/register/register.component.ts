@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NotifierService } from 'src/app/services/notifier/notifier.service';
-import { RegisterResponse } from 'src/app/services/users/models/register-response';
-import { UserService } from 'src/app/services/users/user.service';
+import { NotifierService } from 'src/app/core/services/notifier/notifier.service';
+import { RegisterResponse } from 'src/app/core/services/users/models/register-response';
+import { UserService } from 'src/app/core/services/users/user.service';
 
 @Component({
   selector: 'app-register',
