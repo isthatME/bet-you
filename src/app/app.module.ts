@@ -20,6 +20,8 @@ import { NotifierComponent } from './shared/notifier/notifier.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { FixturesServiceService } from './core/services/fixtures/fixtures-service.service';
+import { MatMenuModule } from '@angular/material/menu';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +41,7 @@ import { FixturesServiceService } from './core/services/fixtures/fixtures-servic
     MatCardModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatMenuModule,
     MatInputModule,
     MatSnackBarModule,
     MatIconModule

@@ -8,9 +8,16 @@
         <nav>
             <ul>
                 <li routerLink="/home">Home</li>
-                <li >Sobre</li>
-                <li routerLink="/login">Entrar</li>
+                <li>Sobre</li>
+                <li routerLink="/login" *ngIf="!isLoggedIn">Entrar</li>
+                <li *ngIf="isLoggedIn" [matMenuTriggerFor]="menu">Sair</li>
             </ul>
         </nav>
     </div>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            <span>Sair</span>
+        </button>
+    </mat-menu>
 </div>

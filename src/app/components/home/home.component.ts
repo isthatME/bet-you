@@ -35,7 +35,6 @@ export class HomeComponent implements OnInit {
     return item ? item.partida_id : undefined;
   }
   geStandardizedFixtureInfo(fixture: Result): string {
-    console.log(fixture.slug)
     let fixtureSearchPattern = fixture.slug
       .split('-')
       .filter((_, idx) => idx < 2)

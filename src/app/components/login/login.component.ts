@@ -9,7 +9,7 @@ import { UserService } from 'src/app/core/services/users/user.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
@@ -41,9 +41,12 @@ export class LoginComponent implements OnInit {
   }
   handleLoginResponse(res: LoginResponse): void {
     if (res.succed) {
-      const token = res.message.split('.')[1]
+      const token = res.data.token.split('.')[1]
+      const user = JSON.parse(window.atob(token))
+      console.log(user)
       this.router.navigate(['home'])
-      this.localStorage.setToken({accesToken: token})
+      this.localStorage.setToken({ accesToken: token })
+      this.localStorage.setUser({ _id:  user.id, userName: user.username})
     } else { this.notifierService.showNotification(res.message, 'Fechar', 'error') }
   }
   handleError(): void {
