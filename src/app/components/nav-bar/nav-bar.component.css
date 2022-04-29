@@ -21,6 +21,7 @@ ul {
     width: 12vw;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 ul li {
     color: aliceblue;

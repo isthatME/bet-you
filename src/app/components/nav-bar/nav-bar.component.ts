@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalStorageService } from 'src/app/core/services/local-storage/local-storage.service';
+import { User } from 'src/app/core/services/users/models/user.inteface';
 
 @Component({
   selector: 'app-nav-bar',
@@ -8,7 +9,7 @@ import { LocalStorageService } from 'src/app/core/services/local-storage/local-s
 })
 export class NavBarComponent implements OnInit {
   isLoggedIn: boolean;
-
+  currentUser: Omit<User, 'password'>;
   constructor(
     private localStorageService: LocalStorageService) { }
 
@@ -17,6 +18,8 @@ export class NavBarComponent implements OnInit {
   }
   checkUserLoggedIn(): void {
     this.isLoggedIn = this.localStorageService.isLoggedIn();
+    this.currentUser = JSON.parse(this.localStorageService.getUser());
+    console.log(this.currentUser)
   }
   logout(): void {
     this.localStorageService.logout();

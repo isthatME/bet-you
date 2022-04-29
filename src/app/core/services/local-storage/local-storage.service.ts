@@ -22,6 +22,9 @@ export class LocalStorageService {
     window.localStorage.removeItem('token');
     window.location.href = window.location.href
   }
+  getUser(): any {
+    return localStorage.getItem('user');
+  }
   isLoggedIn(): boolean {
     return JSON.parse(this.getToken())?.accesToken ? true : false;
   }

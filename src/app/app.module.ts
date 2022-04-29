@@ -21,6 +21,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { FixturesServiceService } from './core/services/fixtures/fixtures-service.service';
 import { MatMenuModule } from '@angular/material/menu';
+import { AvatarModule } from 'ngx-avatar'
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatMenuModule,
     MatInputModule,
     MatSnackBarModule,
-    MatIconModule
+    MatIconModule,
+    AvatarModule
   ],
   providers: [
     FixturesServiceService,
