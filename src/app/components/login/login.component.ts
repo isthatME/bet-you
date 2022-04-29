@@ -43,7 +43,6 @@ export class LoginComponent implements OnInit {
     if (res.succed) {
       const token = res.data.token.split('.')[1]
       const user = JSON.parse(window.atob(token))
-      console.log(user)
       this.router.navigate(['home'])
       this.localStorage.setToken({ accesToken: token })
       this.localStorage.setUser({ _id:  user.id, userName: user.username})
