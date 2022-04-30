@@ -14,9 +14,9 @@ export class UserService {
   constructor(protected http: HttpClient) { }
 
   register(body: RegisterPayload): Observable<RegisterResponse> {
-    return this.http.post<RegisterResponse>(`${environment.api.baseUrl}/register`, body)
+    return this.http.post<RegisterResponse>(`${environment.api.userBaseUrl}/register`, body)
   }
   login(body: LoginPayload): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${environment.api.baseUrl}/login`, body)
+    return this.http.post<LoginResponse>(`${environment.api.userBaseUrl}/login`, body)
   }
 }

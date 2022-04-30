@@ -51,4 +51,7 @@ export class HomeComponent implements OnInit {
     })
 
   }
+  vote(): void {
+    
+  }
 }
