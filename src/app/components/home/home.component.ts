@@ -1,6 +1,9 @@
 import { Component, OnInit, } from '@angular/core';
 import { FixturesServiceService } from 'src/app/core/services/fixtures/fixtures-service.service';
 import { Result } from 'src/app/core/services/fixtures/models/result.model';
+import { LocalStorageService } from 'src/app/core/services/local-storage/local-storage.service';
+import { User } from 'src/app/core/services/users/models/user.inteface';
+import { UserService } from 'src/app/core/services/users/user.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -13,11 +16,17 @@ export class HomeComponent implements OnInit {
   isLoading: boolean;
   searched: boolean;
   voted: boolean[];
+  currentUser: User;
 
-  constructor(private fixturesServiceService: FixturesServiceService) { }
+  constructor(
+    private fixturesServiceService: FixturesServiceService,
+    private userService: UserService,
+    private localStorageService: LocalStorageService
+  ) { }
 
   ngOnInit(): void {
     this.statisticsData = { winPrediction: 20, drawPrediction: 20, lossPrediction: 60 }
+    this.currentUser = JSON.parse(this.localStorageService.getUser());
     this.getResults();
 
   }
@@ -51,7 +60,10 @@ export class HomeComponent implements OnInit {
     })
 
   }
-  vote(): void {
-    
+  vote(fixtureWinner: number, fixtureId: number): void {
+    console.log('yey')
+    this.userService
+      .vote({ fixtureWinner: fixtureWinner, fixtureId: fixtureId, userId: this.currentUser._id})
+      .subscribe();
   }
 }
