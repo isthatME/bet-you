@@ -1,4 +1,5 @@
 import { Component, OnInit, } from '@angular/core';
+import { Router } from '@angular/router';
 import { FixturesServiceService } from 'src/app/core/services/fixtures/fixtures-service.service';
 import { Result } from 'src/app/core/services/fixtures/models/result.model';
 import { LocalStorageService } from 'src/app/core/services/local-storage/local-storage.service';
@@ -21,12 +22,14 @@ export class HomeComponent implements OnInit {
   constructor(
     private fixturesServiceService: FixturesServiceService,
     private userService: UserService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService, 
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.statisticsData = { winPrediction: 20, drawPrediction: 20, lossPrediction: 60 }
     this.currentUser = JSON.parse(this.localStorageService.getUser());
+    console.log(this.currentUser)
     this.getResults();
 
   }
@@ -60,10 +63,13 @@ export class HomeComponent implements OnInit {
     })
 
   }
-  vote(fixtureWinner: number, fixtureId: number): void {
-    console.log('yey')
-    this.userService
-      .vote({ fixtureWinner: fixtureWinner, fixtureId: fixtureId, userId: this.currentUser._id})
-      .subscribe();
+  vote(fixtureWinner: number, fixtureId: number, fixtureIndex: number): void {
+    if (this.currentUser) {
+      this.userService
+        .vote({ fixtureWinner: fixtureWinner, fixtureId: fixtureId, userId: this.currentUser._id })
+        .subscribe(res => {
+          this.fixtures[fixtureIndex].number_of_votes = res.message.numberOfVotes
+        });
+    } else { this.router.navigate(['/login'])}
   }
 }

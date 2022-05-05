@@ -22,14 +22,16 @@
                     <h1>Quem vai ganhar?</h1>
                 </div>
                 <div *ngIf="!voted[i]" class="vote-button-wrapper">
-                    <div class="vote-home-team" (click)="voted[i] = true; vote(0, fixture.partida_id)">{{
+                    <div class="vote-home-team" (click)="voted[i] = true; vote(0, fixture.partida_id, i)">{{
                         fixture.time_mandante.nome_popular }}</div>
-                    <div class="vote-draw" (click)="voted[i] = true; vote(1, fixture.partida_id)">Empate</div>
-                    <div class="vote-visitor" (click)="voted[i] = true; vote(2, fixture.partida_id)">{{
+                    <div class="vote-draw" (click)="voted[i] = true; vote(1, fixture.partida_id, i)">Empate</div>
+                    <div class="vote-visitor" (click)="voted[i] = true; vote(2, fixture.partida_id, i)">{{
                         fixture.time_visitante.nome_popular }}</div>
                 </div>
             </mat-card-content>
-            <div *ngIf="voted[i]" class="votes-amount">366 votos </div>
+            <div *ngIf="voted[i]" class="votes-amount">
+                {{ fixture.number_of_votes + ' torcedores votaram nessa partida'}}
+            </div>
         </mat-card>
     </div>
 </div>

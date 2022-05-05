@@ -1,5 +1,8 @@
 export interface VoteResponseInterface {
     succed: boolean;
     code: number;
-    message: string;
+    message: voteMessageData;
+}
+interface voteMessageData {
+    numberOfVotes: number
 }

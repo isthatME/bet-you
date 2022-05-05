@@ -12,6 +12,7 @@ export interface Result {
     status: string;
     time_mandante: Team;
     time_visitante: Team;
+    number_of_votes: number | null;
 }
 interface Cameponato {
     campeonato_id: string;
