@@ -21,6 +21,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildForm();
+    this.passwordNotEqual();
   }
   buildForm(): void {
     this.form = this.formBuilder.group({
@@ -30,11 +31,24 @@ export class RegisterComponent implements OnInit {
     });
   }
   onSubmit(): void {
-    this.userService
-      .register(this.form.value)
-      .subscribe({
-        next: this.handleRegisterResponse.bind(this),
-        error: this.handleError.bind(this)
+    if (this.form.valid) {
+      this.userService
+        .register(this.form.value)
+        .subscribe({
+          next: this.handleRegisterResponse.bind(this),
+          error: this.handleError.bind(this)
+        })
+    } else if (this.form.errors?.passwordNotMatch) {
+      this.notifierService.showNotification('As senhas não são iguais', 'Fechar', 'error')
+    }
+  }
+  passwordNotEqual(): void {
+    this.form.valueChanges
+      .subscribe(res => {
+        if (res.password !== res.repeatPassword) {
+          this.form.setErrors({ passwordNotMatch: true })
+          console.log(this.form)
+        }
       })
   }
   handleRegisterResponse(res: RegisterResponse): void {
