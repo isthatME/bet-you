@@ -1,8 +1,10 @@
 import { Component, OnInit, } from '@angular/core';
 import { Router } from '@angular/router';
+import { take } from 'rxjs';
 import { FixturesServiceService } from 'src/app/core/services/fixtures/fixtures-service.service';
 import { Result } from 'src/app/core/services/fixtures/models/result.model';
 import { LocalStorageService } from 'src/app/core/services/local-storage/local-storage.service';
+import VotedFixture from 'src/app/core/services/local-storage/models/voted-fixture.interface';
 import { User } from 'src/app/core/services/users/models/user.inteface';
 import { UserService } from 'src/app/core/services/users/user.service';
 @Component({
@@ -22,25 +24,34 @@ export class HomeComponent implements OnInit {
   constructor(
     private fixturesServiceService: FixturesServiceService,
     private userService: UserService,
-    private localStorageService: LocalStorageService, 
+    private localStorageService: LocalStorageService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
     this.statisticsData = { winPrediction: 20, drawPrediction: 20, lossPrediction: 60 }
     this.currentUser = JSON.parse(this.localStorageService.getUser());
-    console.log(this.currentUser)
     this.getResults();
 
   }
+  getVotedFixtures(): void {
+    let allVotedFixtures = JSON.parse(this.localStorageService.getVoted());
+    let userVotedFixturesIndexes = allVotedFixtures.find((votedFixture: VotedFixture) => votedFixture.userId === this.currentUser._id)
+    userVotedFixturesIndexes.votedFixtureIndex.map((index: number,) => {
+      this.voted[index] = true;
+    })
+  }
   getResults(): void {
     this.isLoading = true;
-    this.fixturesServiceService.getFixtures()
+    this.fixturesServiceService
+      .getFixtures()
+      .pipe(take(1))
       .subscribe((res) => {
         this.fixtures = res
         this.fixtureCopy = res
         this.voted = new Array(res.length).fill(false);
         this.isLoading = false;
+        this.getVotedFixtures();
       })
   }
   identify(_: number, item: Result): number | undefined {
@@ -67,9 +78,11 @@ export class HomeComponent implements OnInit {
     if (this.currentUser) {
       this.userService
         .vote({ fixtureWinner: fixtureWinner, fixtureId: fixtureId, userId: this.currentUser._id })
+        .pipe(take(1))
         .subscribe(res => {
           this.fixtures[fixtureIndex].number_of_votes = res.message.numberOfVotes
+          this.localStorageService.saveVote({ userId: this.currentUser._id, votedFixtureIndex: fixtureIndex })
         });
-    } else { this.router.navigate(['/login'])}
+    } else { this.router.navigate(['/login']) }
   }
 }

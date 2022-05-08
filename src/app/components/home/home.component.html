@@ -30,7 +30,7 @@
                 </div>
             </mat-card-content>
             <div *ngIf="voted[i]" class="votes-amount">
-                {{ fixture.number_of_votes + ' torcedores votaram nessa partida'}}
+                {{ fixture.number_of_votes ? fixture.number_of_votes + ' torcedores votaram nessa partida' : 'Você ja fez sua votação'}}
             </div>
         </mat-card>
     </div>
