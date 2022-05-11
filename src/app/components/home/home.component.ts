@@ -35,11 +35,13 @@ export class HomeComponent implements OnInit {
 
   }
   getVotedFixtures(): void {
-    let allVotedFixtures = JSON.parse(this.localStorageService.getVoted());
-    let userVotedFixturesIndexes = allVotedFixtures.find((votedFixture: VotedFixture) => votedFixture.userId === this.currentUser._id)
-    userVotedFixturesIndexes.votedFixtureIndex.map((index: number,) => {
-      this.voted[index] = true;
-    })
+    if (this.currentUser && this.localStorageService.getVoted()) {
+      let allVotedFixtures = JSON.parse(this.localStorageService.getVoted());
+      let userVotedFixturesIndexes = allVotedFixtures.find((votedFixture: VotedFixture) => votedFixture.userId === this.currentUser._id)
+      userVotedFixturesIndexes.votedFixtureIndex.map((index: number,) => {
+        this.voted[index] = true;
+      })
+    }
   }
   getResults(): void {
     this.isLoading = true;
