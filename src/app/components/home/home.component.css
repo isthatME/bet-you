@@ -79,6 +79,9 @@ mat-card-header h1 {
     justify-content: space-around;
     color: aliceblue;
 }
+.score h1 {
+    font-size: 2rem;
+}
 .container-wrapper {
     display: flex;
     margin-top: 5rem;
@@ -93,7 +96,7 @@ mat-card {
     min-width: 28rem;
     margin: 2rem;
     border-radius: 10px;
-    height: 17rem;
+    height: 15rem;
     background-color: #2a2e37;
 }
 mat-card-content {
