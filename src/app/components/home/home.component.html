@@ -12,6 +12,17 @@
                         <img src="{{fixture.time_mandante.escudo}}" alt="">
                         <h1>{{ fixture.time_mandante.nome_popular }}</h1>
                     </div>
+                    <div class="score-board-container" *ngIf="fixture.status === 'andamento'">
+                        <div class="score">
+                            <h1>{{ fixture.placar_mandante}}</h1>
+                        </div>
+                        <div class="score">
+                            <h1>X</h1>
+                        </div>
+                        <div class="score">
+                            <h1>{{ fixture.placar_visitante}}</h1>
+                        </div>
+                    </div>
                     <div class="guest-team">
                         <img src="{{fixture.time_visitante.escudo}}" alt="">
                         <h1>{{ fixture.time_visitante.nome_popular }}</h1>
@@ -30,7 +41,8 @@
                 </div>
             </mat-card-content>
             <div *ngIf="voted[i]" class="votes-amount">
-                {{ fixture.number_of_votes ? fixture.number_of_votes + ' torcedores votaram nessa partida' : 'Você ja fez sua votação'}}
+                {{ fixture.number_of_votes ? fixture.number_of_votes + ' torcedores votaram nessa partida' : 'Você ja
+                fez sua votação'}}
             </div>
         </mat-card>
     </div>
