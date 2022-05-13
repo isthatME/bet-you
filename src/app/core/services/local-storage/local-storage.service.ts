@@ -22,6 +22,7 @@ export class LocalStorageService {
   logout() {
     window.localStorage.removeItem('user');
     window.localStorage.removeItem('token');
+    window.localStorage.removeItem('voted');
     window.location.href = window.location.href
   }
   getUser(): any {
