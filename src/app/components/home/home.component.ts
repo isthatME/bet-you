@@ -60,12 +60,7 @@ export class HomeComponent implements OnInit {
     return item ? item.partida_id : undefined;
   }
   geStandardizedFixtureInfo(fixture: Result): string {
-    let fixtureSearchPattern = fixture.slug
-      .split('-')
-      .filter((_, idx) => idx < 2)
-    fixtureSearchPattern
-      .splice(1, 0, "x")
-    return fixtureSearchPattern.join(' ')
+    return `${fixture.time_mandante.nome_popular} x ${fixture.time_visitante.nome_popular}`
   }
   searchedFixture(searchedFixture: string): void {
     this.searched = true;
