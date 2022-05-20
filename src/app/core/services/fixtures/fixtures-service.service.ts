@@ -10,7 +10,7 @@ export class FixturesServiceService {
 
   constructor(private http: HttpClient) { }
 
-  getFixtures(): Observable<Result[]> {
+  getLiveFixtures(): Observable<Result[]> {
     return this.http.get<Result[]>(`${environment.api.fixturesBaseUrl}/ao-vivo`)
   }
 }

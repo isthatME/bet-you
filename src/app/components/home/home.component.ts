@@ -29,6 +29,8 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.fixturesServiceService.getAllFixtures()
+      .subscribe(res => console.log(res))
     this.statisticsData = { winPrediction: 20, drawPrediction: 20, lossPrediction: 60 }
     this.currentUser = JSON.parse(this.localStorageService.getUser());
     this.getResults();
@@ -46,7 +48,7 @@ export class HomeComponent implements OnInit {
   getResults(): void {
     this.isLoading = true;
     this.fixturesServiceService
-      .getFixtures()
+      .getLiveFixtures()
       .pipe(take(1))
       .subscribe((res) => {
         this.fixtures = res
