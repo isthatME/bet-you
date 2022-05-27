@@ -27,21 +27,5 @@ export class StatisticsGraphComponent implements OnInit, AfterViewInit {
     this.drawPercentage.nativeElement.style.marginRight = '4px';
     this.lossPercentage.nativeElement.style.width = `${this.statisticsData.lossPrediction}%`;
     this.lossPercentage.nativeElement.style.backgroundColor = 'grey';
-    //   new Chart(this.canvas.nativeElement, {
-    //     type: 'doughnut',
-    //     data: {
-    //       datasets: [{
-    //         label: 'My First Dataset',
-    //         data: [80, 20],
-    //         backgroundColor: [
-    //           'grey',
-    //           'white',
-    //         ],
-    //         borderWidth: 0,
-    //         hoverOffset: 0
-    //       }]
-    //     }
-    //   })
-    // }
   }
 }

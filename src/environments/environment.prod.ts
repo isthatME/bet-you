@@ -2,6 +2,7 @@ export const environment = {
   production: true,
   api: {
     userBaseUrl: 'https://bet-you-backend.herokuapp.com/api',
-    fixturesBaseUrl: 'https://api.api-futebol.com.br/v1'
+    fixturesBaseUrl: 'https://api.api-futebol.com.br/v1',
+    predictFixtureBaseUrl: 'https://pfi-brasileirao-api.herokuapp.com'
   }
 };

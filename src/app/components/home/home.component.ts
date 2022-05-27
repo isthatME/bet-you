@@ -1,10 +1,12 @@
 import { Component, OnInit, } from '@angular/core';
 import { Router } from '@angular/router';
-import { take } from 'rxjs';
+import { switchMap, take } from 'rxjs';
 import { FixturesServiceService } from 'src/app/core/services/fixtures/fixtures-service.service';
 import { Result } from 'src/app/core/services/fixtures/models/result.model';
 import { LocalStorageService } from 'src/app/core/services/local-storage/local-storage.service';
 import VotedFixture from 'src/app/core/services/local-storage/models/voted-fixture.interface';
+import { PredictFixturePayload } from 'src/app/core/services/prediction/models/fixture-predict-payload.interface';
+import { PredictionService } from 'src/app/core/services/prediction/prediction.service';
 import { User } from 'src/app/core/services/users/models/user.inteface';
 import { UserService } from 'src/app/core/services/users/user.service';
 @Component({
@@ -15,26 +17,32 @@ import { UserService } from 'src/app/core/services/users/user.service';
 export class HomeComponent implements OnInit {
   fixtures: Result[];
   fixtureCopy: Result[];
-  statisticsData: any
   isLoading: boolean;
   searched: boolean;
   voted: boolean[];
   currentUser: User;
-
+  statisticsData: any
   constructor(
     private fixturesServiceService: FixturesServiceService,
     private userService: UserService,
     private localStorageService: LocalStorageService,
-    private router: Router
+    private router: Router,
+    private predictionService: PredictionService
   ) { }
 
   ngOnInit(): void {
-    this.fixturesServiceService.getAllFixtures()
-      .subscribe(res => console.log(res))
-    this.statisticsData = { winPrediction: 20, drawPrediction: 20, lossPrediction: 60 }
     this.currentUser = JSON.parse(this.localStorageService.getUser());
     this.getResults();
+    this.getPredictions();
 
+  }
+  getPredictions(): void {
+    // this.predictionService
+    //   .getPredict()
+    //   .pipe(take(1))
+    //   .subscribe()
+
+    this.statisticsData = { winPrediction: 20, drawPrediction: 20, lossPrediction: 60 }
   }
   getVotedFixtures(): void {
     if (this.currentUser && this.localStorageService.getVoted()) {
@@ -45,17 +53,40 @@ export class HomeComponent implements OnInit {
       })
     }
   }
+  buildPredictBody(res: Result[]): PredictFixturePayload[] {
+    const weekDays = ['segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado','domingo']
+    const obj = res.map(res => ({
+      rodada: 1,
+       dia: weekDays[new Date(res.data_realizacao_iso).getDay()],
+       mandante: res.time_mandante.nome_popular,
+       visitante: res.time_visitante.nome_popular,
+       arena: res.estadio.nome_popular,
+       estadom: res.placar,
+       estadov: res.placar,
+       pontosm: res.placar_mandante,
+       pontosv: res.placar_visitante
+    }))
+    return obj
+  }
   getResults(): void {
     this.isLoading = true;
     this.fixturesServiceService
       .getLiveFixtures()
-      .pipe(take(1))
+      .pipe(
+        take(1)
+      )
       .subscribe((res) => {
-        this.fixtures = res
-        this.fixtureCopy = res
-        this.voted = new Array(res.length).fill(false);
-        this.isLoading = false;
-        this.getVotedFixtures();
+        const body = this.buildPredictBody(res)
+        this.predictionService.getPredict(body)
+          .subscribe(predict => {
+            this.fixtures = res
+            this.fixtures.forEach((res, idx) => res.statisticsData = predict[idx])
+            this.fixtureCopy = res
+            console.log(this.fixtures)
+            this.voted = new Array(res.length).fill(false);
+            this.isLoading = false;
+            this.getVotedFixtures();
+          })
       })
   }
   identify(_: number, item: Result): number | undefined {

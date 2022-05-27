@@ -1,3 +1,5 @@
+import { PredictFixtureResponse } from "../../prediction/models/fixture-predict-response.interface";
+
 export interface Result {
     campeonato: Cameponato;
     data_realizacao: string;
@@ -13,6 +15,7 @@ export interface Result {
     time_mandante: Team;
     time_visitante: Team;
     number_of_votes: number | null;
+    statisticsData: PredictFixtureResponse;
 }
 interface Cameponato {
     campeonato_id: string;
