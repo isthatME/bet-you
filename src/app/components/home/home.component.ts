@@ -33,16 +33,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = JSON.parse(this.localStorageService.getUser());
     this.getResults();
-    this.getPredictions();
 
-  }
-  getPredictions(): void {
-    // this.predictionService
-    //   .getPredict()
-    //   .pipe(take(1))
-    //   .subscribe()
-
-    this.statisticsData = { winPrediction: 20, drawPrediction: 20, lossPrediction: 60 }
   }
   getVotedFixtures(): void {
     if (this.currentUser && this.localStorageService.getVoted()) {
@@ -54,17 +45,17 @@ export class HomeComponent implements OnInit {
     }
   }
   buildPredictBody(res: Result[]): PredictFixturePayload[] {
-    const weekDays = ['segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado','domingo']
+    const weekDays = ['segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado', 'domingo']
     const obj = res.map(res => ({
       rodada: 1,
-       dia: weekDays[new Date(res.data_realizacao_iso).getDay()],
-       mandante: res.time_mandante.nome_popular,
-       visitante: res.time_visitante.nome_popular,
-       arena: res.estadio.nome_popular,
-       estadom: res.placar,
-       estadov: res.placar,
-       pontosm: res.placar_mandante,
-       pontosv: res.placar_visitante
+      dia: weekDays[new Date(res.data_realizacao_iso).getDay()],
+      mandante: res.time_mandante.nome_popular,
+      visitante: res.time_visitante.nome_popular,
+      arena: res.estadio.nome_popular,
+      estadom: res.placar,
+      estadov: res.placar,
+      pontosm: res.placar_mandante,
+      pontosv: res.placar_visitante
     }))
     return obj
   }
@@ -80,9 +71,14 @@ export class HomeComponent implements OnInit {
         this.predictionService.getPredict(body)
           .subscribe(predict => {
             this.fixtures = res
-            this.fixtures.forEach((res, idx) => res.statisticsData = predict[idx])
+            this.fixtures.forEach((res, idx) => {
+              res.statisticsData = {
+                winPrediction: predict[idx].vitoria_mandante,
+                drawPrediction: predict[idx].empate,
+                lossPrediction: predict[idx].vitoria_visitante
+              }
+            })
             this.fixtureCopy = res
-            console.log(this.fixtures)
             this.voted = new Array(res.length).fill(false);
             this.isLoading = false;
             this.getVotedFixtures();

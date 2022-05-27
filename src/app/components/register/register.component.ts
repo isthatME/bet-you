@@ -47,7 +47,6 @@ export class RegisterComponent implements OnInit {
       .subscribe(res => {
         if (res.password !== res.repeatPassword) {
           this.form.setErrors({ passwordNotMatch: true })
-          console.log(this.form)
         }
       })
   }

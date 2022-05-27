@@ -28,7 +28,7 @@
                         <h1>{{ fixture.time_visitante.nome_popular }}</h1>
                     </div>
                 </div>
-                <app-statistics-graph [statisticsData]="statisticsData"></app-statistics-graph>
+                <app-statistics-graph [statisticsData]="fixture.statisticsData"></app-statistics-graph>
                 <div *ngIf="!voted[i]" class="vote-header">
                     <h1>Quem vai ganhar?</h1>
                 </div>
